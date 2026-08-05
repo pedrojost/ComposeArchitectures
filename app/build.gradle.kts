@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.composearchitectures"
+    namespace = "com.phj.composearchitectures"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.composearchitectures"
+        applicationId = "com.phj.composearchitectures"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

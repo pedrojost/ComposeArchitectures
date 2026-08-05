@@ -1,4 +1,4 @@
-package com.example.composearchitectures
+package com.phj.composearchitectures
 
 import org.junit.Test
 
