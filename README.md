@@ -39,39 +39,37 @@ include(":mviPure")
 include(":mvvmMvi")
 ```
 
-### **app/build.gradle.kts**
+### **C:\Users\pedro\AndroidStudioProjects\ComposeArchitectures\app\src\main\java\com\phj\composearchitectures\MainActivity.kt**
 ```kotlin
-dependencies {
-    implementation(project(":mvvmPure"))
-    // Swap to another module to test different architecture:
-    // implementation(project(":mvvmRepository"))
-    // implementation(project(":mvvmClean"))
-    // implementation(project(":mviPure"))
-    // implementation(project(":mvvmMvi"))
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            com.phj.mvvmpure.ui.HomeScreen()
+          //com.phj.mvipure.HomeScreen()
+        }
+    }
 }
 ```
 
 ---
 
 ## 🏗️ Features
-- Login/IAM  
-- Profile editing  
-- Help section  
+- List of contents  
+- Contact information
 
 ---
 
 ## 🚀 Usage
 1. Clone the repository.  
 2. Open in Android Studio.  
-3. Select the active architecture by editing `app/build.gradle.kts` dependency.  
+3. Select the active architecture by editing `app/MainActivity.kt` desired HomeScreen.  
 4. Run the app to see the chosen architecture in action.  
 
 ---
 
 ## 📸 Screenshots (to be added)
-- Home screen with categories.  
-- Login flow.  
-- Profile editing.  
+- 
 
 ---
 
