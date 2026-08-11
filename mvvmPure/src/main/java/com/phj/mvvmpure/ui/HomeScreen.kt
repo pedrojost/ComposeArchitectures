@@ -9,20 +9,16 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.phj.mvvmpure.viewmodel.HomeViewModel
 import androidx.compose.runtime.getValue
-import com.phj.mvvmpure.ui.components.ErrorMessage
-import com.phj.mvvmpure.ui.components.ItemList
-import com.phj.mvvmpure.ui.components.LoadingIndicator
+import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
-
-    val uiState by homeViewModel.uiState.collectAsState()
+fun HomeScreen() {
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("MVI Pure") }
+                title = { Text("MVVM Pure") }
             )
         }
     ) { padding ->
@@ -33,23 +29,14 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            when {
-                uiState.isLoading -> LoadingIndicator()
-                uiState.errorMessage != null ->{
-                    ErrorMessage(uiState.errorMessage)
-                }
-                uiState.items.isNotEmpty() -> ItemList(uiState.items)
-            }
-
-            Text(text = "Current message: ${uiState.message}")
-
-            Button(onClick = { homeViewModel.updateMessage("Hello Compose + ViewModel!")} ) {
-                Text("Update message")
-            }
-
-            Button(onClick = { homeViewModel.loadItems() }) {
-                Text("Load items")
-            }
+            Text(text = "Hello from MVVM Pure")
         }
+
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    HomeScreen()
 }

@@ -26,7 +26,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HomeScreenPreviewLight() {
     ComposeArchitecturesTheme(darkTheme = false) {
-        HomeScreen()
+        com.phj.mvvmpure.ui.HomeScreen()
+        //            com.phj.mvipure.HomeScreen()
     }
 }
 
@@ -34,7 +35,8 @@ fun HomeScreenPreviewLight() {
 @Composable
 fun HomeScreenPreviewDark() {
     ComposeArchitecturesTheme(darkTheme = true) {
-        HomeScreen()
+        com.phj.mvvmpure.ui.HomeScreen()
+        //            com.phj.mvipure.HomeScreen()
     }
 }
 
