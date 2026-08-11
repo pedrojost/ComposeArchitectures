@@ -4,44 +4,37 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.phj.composearchitectures.ui.theme.ComposeArchitecturesTheme
+import com.phj.mvvmpure.ui.HomeScreen
+import com.phj.mvipure.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            ComposeArchitecturesTheme {
-                Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            com.phj.mvvmpure.ui.HomeScreen()
+//            com.phj.mvipure.HomeScreen()
         }
     }
 }
 
+@Preview(showBackground = true, name = "HomeScreen Light")
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeArchitecturesTheme {
-        Greeting("Android")
+fun HomeScreenPreviewLight() {
+    ComposeArchitecturesTheme(darkTheme = false) {
+        HomeScreen()
     }
 }
+
+@Preview(showBackground = true, name = "HomeScreen Dark")
+@Composable
+fun HomeScreenPreviewDark() {
+    ComposeArchitecturesTheme(darkTheme = true) {
+        HomeScreen()
+    }
+}
+

@@ -24,4 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeArchitectures"
 include(":app")
- 
+include(":mvvmPure")
+include(":mviPure")
