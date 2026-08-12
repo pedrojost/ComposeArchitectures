@@ -10,10 +10,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.phj.mvvmpure.viewmodel.HomeViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
+import com.phj.mvvmpure.ui.components.SearchBar
+import com.phj.mvvmpure.ui.components.TopicList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    homeViewModel: HomeViewModel = viewModel(),
+    onTopicClick: (String) -> Unit
+) {
+    val uiState by homeViewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
@@ -27,16 +33,19 @@ fun HomeScreen() {
                 .padding(padding)
                 .fillMaxSize()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            Text(text = "Hello from MVVM Pure")
+            Text(text = uiState.welcomeMessage, style = MaterialTheme.typography.headlineSmall)
+            SearchBar(
+                query = uiState.searchQuery,
+                onQueryChange = {homeViewModel.updateSearch(it)},
+                onClear = {homeViewModel.updateSearch("")}
+            )
+
+            TopicList(
+                topics = uiState.filteredTopics,
+                onTopicClick = onTopicClick
+            )
         }
-
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
 }

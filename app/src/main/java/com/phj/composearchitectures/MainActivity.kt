@@ -3,40 +3,50 @@ package com.phj.composearchitectures
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.phj.composearchitectures.ui.theme.ComposeArchitecturesTheme
-import com.phj.mvvmpure.ui.HomeScreen
-import com.phj.mvipure.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import com.phj.composearchitectures.navigation.AppNavHost
 
+
+enum class ArchitectureType {
+    MVVMPure,
+    MVIPure
+}
 class MainActivity : ComponentActivity() {
+    // Choose which architecture to launch
+    private val selectedArchitecture = ArchitectureType.MVVMPure
+    //Or: private val selectedArchitecture = ArchitectureType.MVIPure
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            com.phj.mvvmpure.ui.HomeScreen()
-//            com.phj.mvipure.HomeScreen()
+            val navController = rememberNavController()
+
+            when (selectedArchitecture) {
+                ArchitectureType.MVVMPure -> {
+                    AppNavHost(
+                        navController = navController,
+                        homeScreen = { onTopicClick ->
+                            com.phj.mvvmpure.ui.HomeScreen(onTopicClick = onTopicClick)
+                        },
+                        detailScreen = { topic, navController ->
+                            com.phj.mvvmpure.ui.DetailScreen(topic = topic, navController = navController)
+                        }
+                    )
+                }
+                ArchitectureType.MVIPure -> {
+                AppNavHost(
+                    navController = navController,
+                    homeScreen = { onTopicClick ->
+//                        com.phj.mviflow.ui.MviHomeScreen(onTopicClick = onTopicClick)
+                    },
+                    detailScreen = { topic, navController ->
+//                        com.phj.mviflow.ui.DetailScreen(topic = topic, navController = navController)
+                    }
+                )
+            }
+            }
+
         }
-    }
-}
-
-@Preview(showBackground = true, name = "HomeScreen Light")
-@Composable
-fun HomeScreenPreviewLight() {
-    ComposeArchitecturesTheme(darkTheme = false) {
-        com.phj.mvvmpure.ui.HomeScreen()
-        //            com.phj.mvipure.HomeScreen()
-    }
-}
-
-@Preview(showBackground = true, name = "HomeScreen Dark")
-@Composable
-fun HomeScreenPreviewDark() {
-    ComposeArchitecturesTheme(darkTheme = true) {
-        com.phj.mvvmpure.ui.HomeScreen()
-        //            com.phj.mvipure.HomeScreen()
     }
 }
 

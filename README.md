@@ -41,15 +41,14 @@ include(":mvvmMvi")
 
 ### **C:\Users\pedro\AndroidStudioProjects\ComposeArchitectures\app\src\main\java\com\phj\composearchitectures\MainActivity.kt**
 ```kotlin
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            com.phj.mvvmpure.ui.HomeScreen()
-          //com.phj.mvipure.HomeScreen()
-        }
-    }
+enum class ArchitectureType {
+    MVVMPure,
+    MVIPure
 }
+class MainActivity : ComponentActivity() {
+    // Choose which architecture to launch
+    private val selectedArchitecture = ArchitectureType.MVVMPure
+//Or: private val selectedArchitecture = ArchitectureType.MVIPure
 ```
 
 ---
@@ -63,7 +62,7 @@ class MainActivity : ComponentActivity() {
 ## 🚀 Usage
 1. Clone the repository.  
 2. Open in Android Studio.  
-3. Select the active architecture by editing `app/MainActivity.kt` desired HomeScreen.  
+3. Select the active architecture by editing `app/MainActivity.kt` selectedArchitecture val.  
 4. Run the app to see the chosen architecture in action.  
 
 ---

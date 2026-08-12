@@ -12,20 +12,18 @@ class HomeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState
 
-    fun loadItems() {
-        _uiState.value = _uiState.value.copy(isLoading = true)
-
-        viewModelScope.launch{
-            try {
-                val data = listOf("Item 1", "Item 2", "Item 3")
-                _uiState.value = HomeUiState(items = data, message = "Items loaded")
-            } catch (e: Exception) {
-                _uiState.value = HomeUiState(errorMessage = "Fail to load items")
+    fun updateSearch(query: String) {
+        viewModelScope.launch {
+            val allTopics = _uiState.value.topics
+            val filtered = if (query.isBlank()){
+                allTopics
+            } else {
+                allTopics.filter { it.contains(query, ignoreCase = true) }
             }
+            _uiState.value = _uiState.value.copy(
+                searchQuery = query,
+                filteredTopics = filtered
+            )
         }
-    }
-
-    fun updateMessage(newMessage: String) {
-        _uiState.value = _uiState.value.copy(message = newMessage)
     }
 }
